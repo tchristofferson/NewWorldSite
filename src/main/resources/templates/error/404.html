@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/fragments/base-page :: head (${'404 Not Found'})">
+    <meta charset="UTF-8">
+    <title>404 Error</title>
+</head>
+<body class="blue-grey darken-4 white-text">
+    <div th:replace="/fragments/navigation :: navigation"/>
+    <div class="container">
+        <h1 class="center-align">The page your looking for doesn't exist!</h1>
+        <p class="center-align">Make sure the url is correct.</p>
+    </div>
+</body>
+</html>

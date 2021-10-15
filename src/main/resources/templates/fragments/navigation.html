@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+  <div th:fragment="navigation">
+    <nav class="red">
+      <div class="nav-wrapper">
+        <ul class="right hide-on-med-and-down">
+          <li><a href="/login">Login</a></li>
+          <li><a href="/signup">Signup</a></li>
+        </ul>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <ul class="left hide-on-med-and-down">
+          <li><a href="/">Home</a></li>
+          <li><a href="/companies">Companies</a></li>
+          <li><a href="#">Fight Club</a></li>
+          <li><a href="#">Forums</a></li>
+        </ul>
+      </div>
+    </nav>
+    <ul class="sidenav" id="mobile-demo">
+      <li><a href="/">Home</a></li>
+      <li><a href="/companies">Companies</a></li>
+      <li><a href="#">Fight Club</a></li>
+      <li><a href="#">Forums</a></li>
+    </ul>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.sidenav');
+            var instances = M.Sidenav.init(elems);
+        });
+    </script>
+  </div>
+</body>
+</html>

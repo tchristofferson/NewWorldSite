@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/fragments/base-page :: head (${'Companies'})"></head>
+<body class="blue-grey darken-4 white-text">
+<div th:replace="/fragments/navigation :: navigation"/>
+<div class="container">
+    <h1>Companies</h1>
+<!--    <nav>-->
+<!--        <div class="nav-wrapper">-->
+<!--            <form>-->
+<!--                <div class="input-field">-->
+<!--                    <input id="search" type="search" name="search" required>-->
+<!--                    <label class="label-icon" for="search"><i class="material-icons">search</i></label>-->
+<!--                    <i class="material-icons">close</i>-->
+<!--                </div>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </nav>-->
+    <div class="row">
+        <div class="col s12 m12 center">
+            <a href="/companies/register" class="btn red">Register Company</a>
+        </div>
+    </div>
+    <div class="row">
+        <form>
+            <div class="col s12 m2">
+                <input placeholder="Company Name" class="white-text" id="name" type="search" name="search">
+            </div>
+            <div class="col s12 m2">
+                <input placeholder="Server" class="white-text" id="server" type="search" name="server">
+            </div>
+            <div class="col s12 m2">
+                <select id="faction" name="faction">
+                    <option value="" selected>All Factions</option>
+                    <option value="COVENANT">Covenant</option>
+                    <option value="MARAUDERS">Marauders</option>
+                    <option value="SYNDICATE">Syndicate</option>
+                </select>
+            </div>
+            <div class="col s12 m2">
+                <select id="region" name="region">
+                    <option value="" selected>All Regions</option>
+                    <option value="US_EAST">US East</option>
+                    <option value="US_WEST">US West</option>
+                    <option value="EU_CENTRAL">EU Central</option>
+                    <option value="AP_SOUTHEAST">AP Southeast</option>
+                    <option value="SA_EAST">SA East</option>
+                </select>
+            </div>
+            <div class="col s12 m2">
+                <select id="size" name="size">
+                    <option value="" selected>All Sizes</option>
+                    <option value="UNDER_10">&lt;10</option>
+                    <option value="UNDER_25">&lt;25</option>
+                    <option value="UNDER_50">&lt;50</option>
+                    <option value="OVER_50">50+</option>
+                </select>
+            </div>
+            <div class="col s12 m2">
+                <button type="submit" class="btn red">Filter</button>
+            </div>
+        </form>
+        <script th:replace="/fragments/base-page :: select-init"></script>
+    </div>
+    <div class="row">
+        <div class="col s12 m4" th:each="company: ${companies}">
+            <a th:href="@{'/companies/' + ${company.id}}">
+                <div class="card blue-grey darken-1 hoverable">
+                    <div class="card-content white-text">
+                        <span class="card-title" th:text="${company.name} + ' - ' + ${company.region}"/>
+                        <p th:text="${company.description}"/>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Server</th>
+                                <th>Faction</th>
+                                <th>Size</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr>
+                                <td th:text="${company.server}"/>
+                                <td th:text="${company.faction}"/>
+                                <td th:text="${company.factionSize}"/>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

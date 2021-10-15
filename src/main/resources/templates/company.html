@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/fragments/base-page :: head (${company.name})"/>
+<body class="blue-grey darken-4 white-text">
+    <div th:replace="/fragments/navigation :: navigation"/>
+    <div class="container">
+        <div>
+            <div>
+                <h1 th:text="${company.name}"/>
+                <p class="flow-text" th:text="${company.description}"/>
+            </div>
+            <div>
+                <h4>Server</h4>
+                <p class="flow-text" th:text="${company.server}"/>
+            </div>
+            <div>
+                <h4>Faction</h4>
+                <p class="flow-text" th:text="${company.faction}"/>
+            </div>
+            <div>
+                <h4>Size</h4>
+                <p class="flow-text" th:text="${company.factionSize}"/>
+            </div>
+        </div>
+        <div>
+            <h4>Comments</h4>
+            <textarea id="content"></textarea>
+            <button class="btn waves-effect waves-light red">Comment</button>
+        </div>
+    </div>
+</body>
+</html>
