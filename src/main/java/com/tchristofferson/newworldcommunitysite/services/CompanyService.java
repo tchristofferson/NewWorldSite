@@ -21,15 +21,9 @@ public class CompanyService {
     public CompanyService(@Qualifier("testDao") CompaniesDao companiesDao) {
         this.companiesDao = companiesDao;
         this.companiesDao.addCompany(new Company("Cheeky Blinders", "Himavanta", Factions.MARAUDERS, Regions.US_EAST, FactionSizes.UNDER_25, "The Cheeky Blinders is the most notorious gang in all of New World. We hunt in packs and kill everything in our path."));
-        this.companiesDao.addCompany(new Company("Cheeky Blinders", "Himavanta", Factions.MARAUDERS, Regions.US_EAST, FactionSizes.UNDER_25, "The Cheeky Blinders is the most notorious gang in all of New World. We hunt in packs and kill everything in our path."));
-        this.companiesDao.addCompany(new Company("Cheeky Blinders", "Himavanta", Factions.MARAUDERS, Regions.US_EAST, FactionSizes.UNDER_25, "The Cheeky Blinders is the most notorious gang in all of New World. We hunt in packs and kill everything in our path."));
-        this.companiesDao.addCompany(new Company("Cheeky Blinders", "Himavanta", Factions.MARAUDERS, Regions.US_EAST, FactionSizes.UNDER_25, "The Cheeky Blinders is the most notorious gang in all of New World. We hunt in packs and kill everything in our path."));
-        this.companiesDao.addCompany(new Company("Cheeky Blinders", "Himavanta", Factions.MARAUDERS, Regions.US_EAST, FactionSizes.UNDER_25, "The Cheeky Blinders is the most notorious gang in all of New World. We hunt in packs and kill everything in our path."));
-        this.companiesDao.addCompany(new Company("Cheeky Blinders", "Himavanta", Factions.MARAUDERS, Regions.US_EAST, FactionSizes.UNDER_25, "The Cheeky Blinders is the most notorious gang in all of New World. We hunt in packs and kill everything in our path."));
-        this.companiesDao.addCompany(new Company("Cheeky Blinders", "Himavanta", Factions.MARAUDERS, Regions.US_EAST, FactionSizes.UNDER_25, "The Cheeky Blinders is the most notorious gang in all of New World. We hunt in packs and kill everything in our path."));
-        this.companiesDao.addCompany(new Company("Cheeky Blinders", "Himavanta", Factions.MARAUDERS, Regions.US_EAST, FactionSizes.UNDER_25, "The Cheeky Blinders is the most notorious gang in all of New World. We hunt in packs and kill everything in our path."));
-        this.companiesDao.addCompany(new Company("Cheeky Blinders", "Himavanta", Factions.MARAUDERS, Regions.US_EAST, FactionSizes.UNDER_25, "The Cheeky Blinders is the most notorious gang in all of New World. We hunt in packs and kill everything in our path."));
-        this.companiesDao.addCompany(new Company("Cheeky Blinders", "Himavanta", Factions.MARAUDERS, Regions.US_EAST, FactionSizes.UNDER_25, "The Cheeky Blinders is the most notorious gang in all of New World. We hunt in packs and kill everything in our path."));
+        this.companiesDao.addCompany(new Company("The Crimson Shadow", "Krocylea", Factions.MARAUDERS, Regions.US_EAST, FactionSizes.OVER_50, "We only play New World. We are not like other companies that are playing multiple games. We are laser focused on New World and  clearing its content. Drop on by if you're interested!"));
+        this.companiesDao.addCompany(new Company("The High Council", "Himavanta", Factions.MARAUDERS, Regions.US_EAST, FactionSizes.UNDER_50, "We are a PvP heavy company that focuses on territory control."));
+        this.companiesDao.addCompany(new Company("Ordo Aeterna Lucis", "Valhalla", Factions.COVENANT, Regions.US_EAST, FactionSizes.OVER_50, "We are focused on maintaining an active and cohesive companies that we will continuously refine as we progress to maintain a competitive edge"));
     }
 
     public void addCompany(Company company) {
@@ -50,5 +44,9 @@ public class CompanyService {
 
     public List<Company> getCompanies() {
         return companiesDao.getCompanies();
+    }
+
+    public List<Company> getCompanies(String name, String server, Factions faction, Regions region, FactionSizes factionSize) {
+        return companiesDao.getCompanies(name, server, faction, region, factionSize);
     }
 }

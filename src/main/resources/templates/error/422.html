@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/fragments/base-page :: head (${'422 Error'})"/>
+<body class="blue-grey darken-4 white-text">
+  <div th:replace="/fragments/navigation :: navigation"/>
+  <div class="container" th:replace="/error/generic-error :: error (${errorMessage})"/>
+</body>
+</html>

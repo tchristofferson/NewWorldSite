@@ -1,7 +1,6 @@
 package com.tchristofferson.newworldcommunitysite.controllers;
 
 import com.tchristofferson.newworldcommunitysite.exc.NotFoundException;
-import com.tchristofferson.newworldcommunitysite.exc.UnprocessableEntityException;
 import com.tchristofferson.newworldcommunitysite.models.Company;
 import com.tchristofferson.newworldcommunitysite.models.enums.FactionSizes;
 import com.tchristofferson.newworldcommunitysite.models.enums.Factions;
@@ -27,8 +26,27 @@ public class CompaniesController {
     }
 
     @GetMapping
-    public String getCompanies(Model model) {
-        model.addAttribute("companies", companyService.getCompanies());
+    public String getCompanies(
+            Model model,
+            @Nullable @RequestParam("name") String name,
+            @Nullable @RequestParam("server") String server,
+            @Nullable @RequestParam("faction") String factionString,
+            @Nullable @RequestParam("region") String regionString,
+            @Nullable @RequestParam("size") String factionSizeString) {
+        Factions faction;
+        Regions region;
+        FactionSizes factionSize;
+
+        try {
+            faction = factionString == null || factionString.isBlank() ? null : Factions.valueOf(factionString);
+            region = regionString == null || regionString.isBlank() ? null : Regions.valueOf(regionString);
+            factionSize = factionSizeString == null || factionSizeString.isBlank() ? null : FactionSizes.valueOf(factionSizeString);
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("errorMessage", "Invalid faction, region, or faction size specified!");
+            return "/error/422";
+        }
+
+        model.addAttribute("companies", companyService.getCompanies(name, server, faction, region, factionSize));
         return "companies";
     }
 
@@ -50,6 +68,7 @@ public class CompaniesController {
 
     @PostMapping(path = "/create")
     public String createCompany(
+            Model model,
             @RequestParam("name") String name,
             @RequestParam("server") String server,
             @RequestParam("faction") String factionString,
@@ -65,7 +84,8 @@ public class CompaniesController {
             region = Regions.valueOf(regionString);
             factionSize = FactionSizes.valueOf(factionSizeString);
         } catch (IllegalArgumentException e) {
-            throw new UnprocessableEntityException("Unprocessable faction, region, or factionSize specified!");
+            model.addAttribute("errorMessage", "Invalid faction, region, or faction size specified!");
+            return "/error/422";
         }
 
         Company company = new Company(name.trim(), server.trim(), faction, region, factionSize, description);

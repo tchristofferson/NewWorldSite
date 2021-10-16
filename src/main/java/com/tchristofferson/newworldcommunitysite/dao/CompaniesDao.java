@@ -1,6 +1,9 @@
 package com.tchristofferson.newworldcommunitysite.dao;
 
 import com.tchristofferson.newworldcommunitysite.models.Company;
+import com.tchristofferson.newworldcommunitysite.models.enums.FactionSizes;
+import com.tchristofferson.newworldcommunitysite.models.enums.Factions;
+import com.tchristofferson.newworldcommunitysite.models.enums.Regions;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,5 +19,7 @@ public interface CompaniesDao {
     boolean deleteCompany(int id);
 
     List<Company> getCompanies();
+
+    List<Company> getCompanies(String name, String server, Factions faction, Regions region, FactionSizes factionSize);
 
 }

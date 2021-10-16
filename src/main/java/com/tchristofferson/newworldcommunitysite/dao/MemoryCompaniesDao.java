@@ -1,9 +1,13 @@
 package com.tchristofferson.newworldcommunitysite.dao;
 
 import com.tchristofferson.newworldcommunitysite.models.Company;
+import com.tchristofferson.newworldcommunitysite.models.enums.FactionSizes;
+import com.tchristofferson.newworldcommunitysite.models.enums.Factions;
+import com.tchristofferson.newworldcommunitysite.models.enums.Regions;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 @Repository("testDao")
 public class MemoryCompaniesDao implements CompaniesDao {
@@ -46,5 +50,22 @@ public class MemoryCompaniesDao implements CompaniesDao {
     @Override
     public List<Company> getCompanies() {
         return new ArrayList<>(COMPANY_DB.values());
+    }
+
+    @Override
+    public List<Company> getCompanies(String name, String server, Factions faction, Regions region, FactionSizes factionSize) {
+        List<Company> companyList = new ArrayList<>();
+
+        for (Company company : COMPANY_DB.values()) {
+            if ((name == null || company.getName().toLowerCase().contains(name.trim().toLowerCase()))
+                    && (server == null || company.getServer().toLowerCase().contains(server.trim().toLowerCase()))
+                    && (faction == null || company.getFaction() == faction)
+                    && (region == null || company.getRegion() == region)
+                    && (factionSize == null || company.getFactionSize() == factionSize)) {
+                companyList.add(company);
+            }
+        }
+
+        return companyList;
     }
 }

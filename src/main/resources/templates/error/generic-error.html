@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body class="blue-grey darken-4 white-text">
+<div th:replace="/fragments/navigation :: navigation"/>
+<div class="container" th:fragment="error (message)">
+  <h1 class="center-align">Uh Oh!</h1>
+  <p class="center-align" th:text="${message}"/>
+</div>
+</body>
+</html>
