@@ -10,7 +10,12 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
 <body>
-
+    <option th:fragment="factions-option" th:each="faction : ${T(com.tchristofferson.newworldcommunitysite.models.enums.Factions).values()}"
+            th:value="${faction.name()}" th:text="${faction.toString()}"/>
+    <option th:fragment="regions-option" th:each="region : ${T(com.tchristofferson.newworldcommunitysite.models.enums.Regions).values()}"
+            th:value="${region.name()}" th:text="${region.toString()}"/>
+    <option th:fragment="faction-sizes-option" th:each="size : ${T(com.tchristofferson.newworldcommunitysite.models.enums.FactionSizes).values()}"
+            th:value="${size.name()}" th:text="${size.toString()}"/>
 </body>
 <script th:fragment="select-init">
   document.addEventListener('DOMContentLoaded', function() {

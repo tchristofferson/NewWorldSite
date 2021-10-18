@@ -9,40 +9,30 @@
     <div class="container">
         <h1>Register New Company</h1>
         <form th:action="@{/companies/create}" method="post" class="white-text">
-            <label for="name">Company Name</label>
+            <label for="name">Company Name*</label>
             <input class="white-text" type="text" id="name" name="name">
-            <label for="server">Server Name</label>
+            <label for="server">Server Name*</label>
             <select id="server" name="server" class="browser-default">
                 <option value="HIMAVANTA">Himavanta</option>
                 <option value="VALHALLA">Valhalla</option>
                 <option value="AARNIVALKEA">Aarnivalkea</option>
             </select>
-            <label for="faction">Faction</label>
+            <label for="faction">Faction*</label>
             <select id="faction" name="faction" class="browser-default">
-                <option value="COVENANT">Covenant</option>
-                <option value="MARAUDERS">Marauders</option>
-                <option value="SYNDICATE">Syndicate</option>
+                <option th:replace="/fragments/base-page :: factions-option"/>
             </select>
-            <label for="region">Region</label>
+            <label for="region">Region*</label>
             <select id="region" name="region" class="browser-default">
-                <option value="US_EAST">US East</option>
-                <option value="US_WEST">US West</option>
-                <option value="SA_EAST">SA East</option>
-                <option value="EU_CENTRAL">EU Central</option>
-                <option value="AP_SOUTHEAST">AP Southeast</option>
+                <option th:replace="/fragments/base-page :: regions-option"/>
             </select>
-            <label for="factionSize">Faction Size</label>
+            <label for="factionSize">Faction Size*</label>
             <select id="factionSize" name="factionSize" class="browser-default">
-                <option value="UNDER_10">&#60;10</option>
-                <option value="UNDER_25">&#60;25</option>
-                <option value="UNDER_50">&#60;50</option>
-                <option value="OVER_50">&#60;50+</option>
+                <option th:replace="/fragments/base-page :: faction-sizes-option"/>
             </select>
             <label for="description">Description</label>
             <textarea placeholder="Description" class="white-text materialize-textarea" name="description" id="description"></textarea>
             <input class="btn red" type="submit" value="Register Company">
         </form>
     </div>
-    <script th:replace="/fragments/base-page :: select-init"></script>
 </body>
 </html>

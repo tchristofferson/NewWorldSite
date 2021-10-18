@@ -21,35 +21,25 @@
             <div class="col s12 m2">
                 <select id="faction" name="faction" class="browser-default">
                     <option value="" selected>All Factions</option>
-                    <option value="COVENANT">Covenant</option>
-                    <option value="MARAUDERS">Marauders</option>
-                    <option value="SYNDICATE">Syndicate</option>
+                    <option th:replace="/fragments/base-page :: factions-option"/>
                 </select>
             </div>
             <div class="col s12 m2">
                 <select id="region" name="region" class="browser-default">
                     <option value="" selected>All Regions</option>
-                    <option value="US_EAST">US East</option>
-                    <option value="US_WEST">US West</option>
-                    <option value="EU_CENTRAL">EU Central</option>
-                    <option value="AP_SOUTHEAST">AP Southeast</option>
-                    <option value="SA_EAST">SA East</option>
+                    <option th:replace="/fragments/base-page :: regions-option"/>
                 </select>
             </div>
             <div class="col s12 m2">
                 <select id="size" name="size" class="browser-default">
                     <option value="" selected>All Sizes</option>
-                    <option value="UNDER_10">&lt;10</option>
-                    <option value="UNDER_25">&lt;25</option>
-                    <option value="UNDER_50">&lt;50</option>
-                    <option value="OVER_50">50+</option>
+                    <option th:replace="/fragments/base-page :: faction-sizes-option"/>
                 </select>
             </div>
             <div class="col s12 m2">
                 <button type="submit" class="btn red">Filter</button>
             </div>
         </form>
-        <script th:replace="/fragments/base-page :: select-init"></script>
     </div>
     <div class="row">
         <div class="col s12 m4" th:each="company: ${companies}">
