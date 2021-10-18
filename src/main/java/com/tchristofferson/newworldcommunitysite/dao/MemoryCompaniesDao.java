@@ -4,6 +4,10 @@ import com.tchristofferson.newworldcommunitysite.models.Company;
 import com.tchristofferson.newworldcommunitysite.models.enums.FactionSizes;
 import com.tchristofferson.newworldcommunitysite.models.enums.Factions;
 import com.tchristofferson.newworldcommunitysite.models.enums.Regions;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
@@ -48,12 +52,25 @@ public class MemoryCompaniesDao implements CompaniesDao {
     }
 
     @Override
-    public List<Company> getCompanies() {
-        return new ArrayList<>(COMPANY_DB.values());
+    public Page<Company> findPaginated(Pageable pageable, String name, String server, Factions faction, Regions region, FactionSizes factionSize) {
+        List<Company> matchingCompanies = getCompanies(name, server, faction, region, factionSize);
+
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+        List<Company> companyList;
+
+        if (matchingCompanies.size() < startItem) {
+            companyList = Collections.emptyList();
+        } else {
+            int toIndex = Math.min(startItem + pageSize, matchingCompanies.size());
+            companyList = matchingCompanies.subList(startItem, toIndex);
+        }
+
+        return new PageImpl<>(companyList, PageRequest.of(currentPage, pageSize), matchingCompanies.size());
     }
 
-    @Override
-    public List<Company> getCompanies(String name, String server, Factions faction, Regions region, FactionSizes factionSize) {
+    private List<Company> getCompanies(String name, String server, Factions faction, Regions region, FactionSizes factionSize) {
         List<Company> companyList = new ArrayList<>();
 
         for (Company company : COMPANY_DB.values()) {

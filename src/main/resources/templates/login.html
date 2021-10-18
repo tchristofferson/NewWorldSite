@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/fragments/base-page :: head (${'Login'})"/>
+<body>
+    <h2 class="form-signin-heading">Please log in</h2>
+    <form action="/login">
+        <label for="username" class="sr-only">Username</label>
+        <input type="text" id="username" name="username" class="form-control" placeholder="Username" required autofocus>
+        <label for="password" class="sr-only">Password</label>
+        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+        <button class="red btn" type="submit">Log in</button>
+    </form>
+</body>
+</html>

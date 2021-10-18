@@ -7,9 +7,10 @@ import com.tchristofferson.newworldcommunitysite.models.enums.Factions;
 import com.tchristofferson.newworldcommunitysite.models.enums.Regions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -42,11 +43,7 @@ public class CompanyService {
         return companiesDao.deleteCompany(id);
     }
 
-    public List<Company> getCompanies() {
-        return companiesDao.getCompanies();
-    }
-
-    public List<Company> getCompanies(String name, String server, Factions faction, Regions region, FactionSizes factionSize) {
-        return companiesDao.getCompanies(name, server, faction, region, factionSize);
+    public Page<Company> findPaginated(Pageable pageable, String name, String server, Factions faction, Regions region, FactionSizes factionSize) {
+        return companiesDao.findPaginated(pageable, name, server, faction, region, factionSize);
     }
 }

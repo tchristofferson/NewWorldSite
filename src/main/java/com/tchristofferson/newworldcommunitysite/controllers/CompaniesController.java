@@ -7,6 +7,7 @@ import com.tchristofferson.newworldcommunitysite.models.enums.Factions;
 import com.tchristofferson.newworldcommunitysite.models.enums.Regions;
 import com.tchristofferson.newworldcommunitysite.services.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,7 @@ import java.util.Optional;
 @RequestMapping("/companies")
 public class CompaniesController {
 
+    private static final int COMPANIES_PER_PAGE = 30;
     private final CompanyService companyService;
 
     @Autowired
@@ -25,9 +27,10 @@ public class CompaniesController {
         this.companyService = companyService;
     }
 
-    @GetMapping
+    @GetMapping(path = "/page/{page}")
     public String getCompanies(
             Model model,
+            @PathVariable("page") int page,
             @Nullable @RequestParam("name") String name,
             @Nullable @RequestParam("server") String server,
             @Nullable @RequestParam("faction") String factionString,
@@ -46,7 +49,7 @@ public class CompaniesController {
             return "/error/422";
         }
 
-        model.addAttribute("companies", companyService.getCompanies(name, server, faction, region, factionSize));
+        model.addAttribute("companies", companyService.findPaginated(PageRequest.of(page - 1, COMPANIES_PER_PAGE), name, server, faction, region, factionSize));
         return "companies";
     }
 
